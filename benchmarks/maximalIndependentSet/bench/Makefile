@@ -5,7 +5,7 @@ CHECKFILES = $(BNCHMRK)Check.o
 
 COMMON = 
 
-INCLUDE = -Icommon
+INCLUDE =
 
 %.o : %.C $(COMMON)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
