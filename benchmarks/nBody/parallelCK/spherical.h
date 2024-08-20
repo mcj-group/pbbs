@@ -1,1 +1,0 @@
-../bench/spherical.h

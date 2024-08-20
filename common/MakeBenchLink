@@ -15,7 +15,7 @@ CHECK = ../bench/$(BENCH)Check
 INCLUDE =
 
 # Make benchmark
-$(BENCH) : $(TIME).o $(OBJS) $(CHECK) testInputs
+$(BENCH) : $(TIME).o $(OBJS) $(CHECK)
 	$(CC) -o $@ $(TIME).o $(OBJS) $(LFLAGS)
 
 # Timing Code
@@ -29,10 +29,6 @@ $(CHECK) : $(CHECK).C
 # object files
 %.o : %.C $(REQUIRE)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
-# copy over the generic test code
-testInputs : ../bench/testInputs ../bench/testInputs_small
-	cp ../bench/testInputs ../bench/testInputs_small .
 
 clean :
 	rm -f $(BENCH) *.o

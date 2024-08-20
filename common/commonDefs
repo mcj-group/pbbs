@@ -1,5 +1,5 @@
 ifeq (, $(shell clang --version | grep -i opencilk))
-    $(error Need clang with OpenCilk. Did you run source sourcme.sh?)
+    $(error Need clang with OpenCilk.)
 else
     CC = clang++
 endif

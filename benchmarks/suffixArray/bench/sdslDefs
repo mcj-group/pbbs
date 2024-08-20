@@ -1,3 +1,0 @@
-SDSLCF = -std=c++11 -I ~/include
-SDSLLF = -L ~/lib 
-LIBS = -lsdsl
