@@ -60,7 +60,7 @@ void threadTask(Graph const &G, atomic<uint8_t> *vertexFlags,
     //   vertexFlags = 1, excluded
     
     // marked dead
-    if (vertexFlags[vertex].load(memory_order_acquire) == 1) {
+    if (vertexFlags[vertex].load(memory_order_seq_cst) == 1) {
       deads++;
       continue;
     }
@@ -71,9 +71,9 @@ void threadTask(Graph const &G, atomic<uint8_t> *vertexFlags,
     for (const vertexId* it = begin; it != end; it++) {
       vertexId ngh = *it;
       // check for unprocessed predecessors
-      if (vertexFlags[ngh].load(memory_order_acquire) == 0 && ngh < vertex) {
+      if (vertexFlags[ngh].load(memory_order_seq_cst) == 0 && ngh < vertex) {
         proceed = false;
-        if (!vertexFlags[vertex].load(memory_order_acquire)) {
+        if (!vertexFlags[vertex].load(memory_order_seq_cst)) {
           wl.push(vertex, vertex);
           reinserts++;
         }
@@ -85,8 +85,8 @@ void threadTask(Graph const &G, atomic<uint8_t> *vertexFlags,
     if (proceed) {
       for (const vertexId* it = begin; proceed && it != end; it++) {
         vertexId ngh = *it;
-        if (!vertexFlags[ngh].load(memory_order_acquire)) {
-          vertexFlags[ngh].store(1, memory_order_release);
+        if (!vertexFlags[ngh].load(memory_order_seq_cst)) {
+          vertexFlags[ngh].store(1, memory_order_seq_cst);
         }
       }
     }
