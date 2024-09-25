@@ -9,7 +9,7 @@ CLASSIFYFILES = $(addsuffix .train,$(CLASSIFY)) $(addsuffix .test,$(CLASSIFY)) $
 CLASSIFYBZIP = $(addsuffix .bz2,$(CLASSIFYFILES))
 
 $(GENERATORS) :
-	cd ..; make -s $(subst ../,,$@)
+	cd ..; make -j $(subst ../,,$@)
 
 $(STRINGFILES) : $(STRINGBZIP)
 	bunzip2 -k -f $@.bz2
@@ -29,11 +29,11 @@ $(CLASSIFYBZIP) :
 	cp ../../data/$@ .
 
 randomSeq_%_pair_int :  ../addDataSeq
-	make -s $(subst _pair_int,,$@)
+	make -j $(subst _pair_int,,$@)
 	../addDataSeq -t int $(subst _pair_int,,$@) $@
 
 randomSeq_%_pair_double :  ../addDataSeq
-	make -s $(subst _pair_double,,$@)
+	make -j $(subst _pair_double,,$@)
 	../addDataSeq -t double $(subst _pair_double,,$@) $@
 
 randomSeq_10_% : ../randomSeq

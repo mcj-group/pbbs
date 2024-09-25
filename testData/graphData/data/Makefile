@@ -1,7 +1,7 @@
 GENERATORS = ../gridGraph ../rMatGraph ../randLocalGraph ../addWeights ../randDoubleVector ../starGraph ../combGraph ../expGraph ../adjGraphAddWeights ../adjGraphAddSourceSink ../dimacsToFlowGraph ../flowGraphToDimacs
 
 $(GENERATORS) :
-	cd ..; make -s $(subst ../,,$@)
+	cd ..; make -j $(subst ../,,$@)
 
 MAXFLOWGENS = ../maxFlowGens/bin/ac ../maxFlowGens/bin/ak ../maxFlowGens/bin/genrmf ../maxFlowGens/bin/washington ../maxFlowGens/bin/genrmf-wrapper ../maxFlowGens/bin/washington-wrapper
 $(MAXFLOWGENS):
@@ -35,23 +35,23 @@ randLocalGraph_E_10_% : ../randLocalGraph
 	../randLocalGraph -d 3 -m `expr 10 \* $(subst randLocalGraph_E_10_,,$@)` $(subst randLocalGraph_E_10_,,$@) $@
 
 2Dgrid_WE_% : ../addWeights
-	make -s $(subst WE,E,$@) 
+	make -j $(subst WE,E,$@)
 	../addWeights $(subst WE,E,$@) $@
 
 3Dgrid_WE_% : ../addWeights 
-	make -s $(subst WE,E,$@) 
+	make -j $(subst WE,E,$@)
 	../addWeights $(subst WE,E,$@) $@
 
 rMatGraph_WE_% : ../addWeights
-	make -s $(subst WE,E,$@) 
+	make -j $(subst WE,E,$@)
 	../addWeights $(subst WE,E,$@) $@
 
 randLocalGraph_WE_5_% : ../addWeights
-	make -s $(subst WE,E,$@) 
+	make -j $(subst WE,E,$@)
 	../addWeights $(subst WE,E,$@) $@
 
 randLocalGraph_WE_10_% : ../addWeights
-	make -s $(subst WE,E,$@) 
+	make -j $(subst WE,E,$@)
 	../addWeights $(subst WE,E,$@) $@
 
 2Dgrid_J_% : ../gridGraph
@@ -103,14 +103,14 @@ starGraph_E_% : ../starGraph
 	../starGraph $(subst starGraph_E_,,$@) $@
 
 starGraph_WE_% : ../addWeights
-	make -s $(subst WE,E,$@) 
+	make -j $(subst WE,E,$@)
 	../addWeights $(subst WE,E,$@) $@
 
 starGraph_J_% : ../starGraph
 	../starGraph -j $(subst starGraph_J_,,$@) $@
 
 starGraph_WJ_% : ../starGraph
-	make -s $(subst WJ,J,$@)
+	make -j $(subst WJ,J,$@)
 	../adjGraphAddWeights $(subst WJ,J,$@) $@
 
 combGraph_E_% : ../combGraph
@@ -120,7 +120,7 @@ combGraph_J_K_% : ../combGraph
 	../combGraph -o -j -k $(subst combGraph_J_K_,,$@) 25000000 $@
 
 combGraph_WE_% : ../addWeights
-	make -s $(subst WE,E,$@) 
+	make -j $(subst WE,E,$@)
 	../addWeights $(subst WE,E,$@) $@
 
 combGraph_J_% : ../combGraph
@@ -130,48 +130,48 @@ expGraph_E_% : ../expGraph
 	../expGraph $(subst expGraph_E_,,$@) $@
 
 expGraph_WE_% : ../addWeights
-	make -s $(subst WE,E,$@) 
+	make -j $(subst WE,E,$@)
 	../addWeights $(subst WE,E,$@) $@
 
 expGraph_J_% : ../expGraph
 	../expGraph -j $(subst expGraph_J_,,$@) $@
 
 randLocalGraph_WJ_5_% : ../adjGraphAddWeights
-	make -s $(subst WJ,J,$@) 
+	make -j $(subst WJ,J,$@)
 	../adjGraphAddWeights $(subst WJ,J,$@) $@
 
 rMatGraph_WJ_5_% : ../adjGraphAddWeights
-	make -s $(subst WJ,J,$@) 
+	make -j $(subst WJ,J,$@)
 	../adjGraphAddWeights $(subst WJ,J,$@) $@
 
 2Dgrid_WJ_% : ../adjGraphAddWeights
-	make -s $(subst WJ,J,$@) 
+	make -j $(subst WJ,J,$@)
 	../adjGraphAddWeights $(subst WJ,J,$@) $@
 
 3Dgrid_WJ_% : ../adjGraphAddWeights
-	make -s $(subst WJ,J,$@) 
+	make -j $(subst WJ,J,$@)
 	../adjGraphAddWeights $(subst WJ,J,$@) $@
 
 binTree_E_% : ../binTree
 	../binTree $(subst binTree_E_,,$@) $@
 
 binTree_WE_% : ../addWeights
-	make -s $(subst WE,E,$@) 
+	make -j $(subst WE,E,$@)
 	../addWeights $(subst WE,E,$@) $@
 
 binTree_J_% : ../binTree
 	../binTree -j $(subst binTree_J_,,$@) $@
 
 binTree_WJ_% : ../adjGraphAddWeights
-	make -s $(subst WJ,J,$@) 
+	make -j $(subst WJ,J,$@)
 	../adjGraphAddWeights $(subst WJ,J,$@) $@
 
 randLocalGraph_F_% rMatGraph_F_%: ../adjGraphAddSourceSink
-	make -s $(subst F,WJ,$@)
+	make -j $(subst F,WJ,$@)
 	../adjGraphAddSourceSink $(subst F,WJ,$@) $@
 
 randLocalGraph_FD_% rMatGraph_FD_%: ../flowGraphToDimacs
-	make -s $(subst FD,F,$@)
+	make -j $(subst FD,F,$@)
 	../flowGraphToDimacs $(subst FD,F,$@) $@
 
 ac_FD_%: ../maxFlowGens/bin/ac
@@ -199,5 +199,5 @@ washington_line_moderate_FD_%: ../maxFlowGens/bin/washington-wrapper
 ac_F_% ak_F_% genrmf_long_F_% genrmf_wide_F_% \
 	washington_rlg_long_F_% washington_rlg_wide_F_% \
 	washington_line_moderate_F_%: ../dimacsToFlowGraph
-	make -s $(subst F,FD,$@)
+	make -j $(subst F,FD,$@)
 	../dimacsToFlowGraph $(subst F,FD,$@) $@

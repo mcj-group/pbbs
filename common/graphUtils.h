@@ -27,9 +27,9 @@
 #include <cstdlib>
 #include <math.h>
 #include "graph.h"
-#include "../parlay/parallel.h"
-#include "../parlay/primitives.h"
-#include "../parlay/random.h"
+#include "parlay/parallel.h"
+#include "parlay/primitives.h"
+#include "parlay/random.h"
 #include "dataGen.h"
 
 using namespace std;

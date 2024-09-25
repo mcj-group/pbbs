@@ -1,5 +1,5 @@
-#include "../parlay/sequence.h"
-#include "../parlay/internal/get_time.h"
+#include "parlay/sequence.h"
+#include "parlay/internal/get_time.h"
 #include "range_min.h"
 
 //  The suffix array SA are indices into the string s

@@ -24,8 +24,8 @@
 
 #include <iostream>
 #include <algorithm>
-#include "../parlay/parallel.h"
-#include "../parlay/primitives.h"
+#include "parlay/parallel.h"
+#include "parlay/primitives.h"
 
 // IntV and IntE should be set depending on the size of the graphs
 //  intV should have enough range to represent |V|

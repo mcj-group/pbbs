@@ -19,12 +19,12 @@ $(BENCH) : $(TIME).o $(OBJS) $(CHECK) testInputs
 	$(CC) -o $@ $(TIME).o $(OBJS) $(LFLAGS)
 
 # Timing Code
-$(TIME).o : ../bench/$(TIME).C 
+$(TIME).o : ../bench/$(TIME).C
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c ../bench/$(TIME).C
 	
 # The check code
 $(CHECK) : $(CHECK).C
-	cd ../bench; make -s $(BENCH)Check
+	make $(BENCH)Check -C ../bench
 
 # object files
 %.o : %.C $(REQUIRE)
@@ -38,4 +38,5 @@ clean :
 	rm -f $(BENCH) *.o
 
 cleanall : clean
-	rm -f testInputs*; cd ../bench; make -s clean
+	rm -f testInputs*;
+	make clean -C ../bench

@@ -7,7 +7,7 @@ clean :
 	rm -f *0* *Rays $(TRIANGLEBZIP) $(TRIANGLEFILES)
 
 $(GENERATORS) :
-	cd ..; make -s $(subst ../,,$@)
+	cd ..; make -j $(subst ../,,$@)
 
 $(TRIANGLEFILES) : $(TRIANGLEBZIP)
 	bunzip2 -f $@.bz2
@@ -16,7 +16,7 @@ $(TRIANGLEBZIP) :
 	cp ../../data/$@ .
 
 %.node : ../toNodes
-	make -s $(subst .node,,$@)
+	make -j $(subst .node,,$@)
 	../toNodes $(subst .node,,$@) $@
 
 cubes_% : ../randPoints
@@ -74,9 +74,9 @@ cubes_% : ../randPoints
 	../addRays $(subst Rays,Triangles,$@) $@
 
 2DinCubeDelaunay_% : 
-	make -s $(subst Delaunay,,$@) 
+	make -j $(subst Delaunay,,$@)
 	../../../benchmarks/delaunayTriangulation/incrementalDelaunay/delaunay -o $@ $(subst Delaunay,,$@) 
 
 2DkuzminDelaunay_% : 
-	make -s $(subst Delaunay,,$@) 
+	make -j $(subst Delaunay,,$@)
 	../../../benchmarks/delaunayTriangulation/incrementalDelaunay/delaunay -o $@ $(subst Delaunay,,$@) 

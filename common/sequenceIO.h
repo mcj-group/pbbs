@@ -27,8 +27,8 @@
 #include <string>
 #include <cstring>
 #include "IO.h"
-#include "../parlay/primitives.h"
-#include "../parlay/io.h"
+#include "parlay/primitives.h"
+#include "parlay/io.h"
 
 namespace parlay {
   using chars = sequence<char>;

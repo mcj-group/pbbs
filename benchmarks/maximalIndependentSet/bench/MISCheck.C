@@ -51,14 +51,14 @@ int checkMaximalIndependentSet(graph<size_t> const &G,
 	return P(n,n);
       }), parlay::minm<P>());
   if (R.first < n) {
-    if (R.second < n) 
+    if (R.second < n)
       cout << "checkMaximalIndependentSet: bad edge ("
 	   << R.first << ", " << R.second << ")" << endl;
     else
       cout << "checkMaximalIndependentSet: bad vertex "
 	   << R.first << endl;
     return 1;
-  }      
+  }
   return 0;
 }
 

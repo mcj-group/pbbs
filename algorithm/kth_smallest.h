@@ -1,6 +1,6 @@
 #pragma once
-#include "../parlay/primitives.h"
-#include "../parlay/random.h"
+#include "parlay/primitives.h"
+#include "parlay/random.h"
 
 namespace pbbs {
   using namespace parlay;

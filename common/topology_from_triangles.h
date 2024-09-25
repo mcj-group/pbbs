@@ -22,8 +22,8 @@
 
 #include <iostream>
 #include <algorithm>
-#include "../parlay/hash_table.h"
-#include "../parlay/primitives.h"
+#include "parlay/hash_table.h"
+#include "parlay/primitives.h"
 #include "get_time.h"
 #include "atomics.h"
 #include "geometry.h"

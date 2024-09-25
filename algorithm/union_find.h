@@ -20,8 +20,8 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#include "../parlay/primitives.h"
-#include "../parlay/parallel.h"
+#include "parlay/primitives.h"
+#include "parlay/parallel.h"
 #include "../common/atomics.h"
 
 // The following supports both "union" that is only safe sequentially

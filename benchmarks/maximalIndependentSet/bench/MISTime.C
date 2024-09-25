@@ -32,11 +32,16 @@
 using namespace std;
 using namespace benchIO;
 
-void timeMIS(Graph const &G, int rounds, char* outFile) {
-  parlay::sequence<char> flags = maximalIndependentSet(G);
+void timeMIS(
+  Graph const &G, int rounds, char* outFile, char* qType, int threadNum, int queueNum,
+  int batchSizePop, int batchSizePush, int delta, int bucketNum, int stickiness, bool usePrefetch) {
+  parlay::sequence<char> flags = maximalIndependentSet(
+    G, qType, threadNum, queueNum, batchSizePop, batchSizePush, delta, bucketNum, stickiness, usePrefetch);
   time_loop(rounds, 1.0,
 	    [&] () {flags.clear();},
-	    [&] () {flags = maximalIndependentSet(G);},
+	    [&] () {flags = maximalIndependentSet(
+                G, qType, threadNum, queueNum, batchSizePop, batchSizePush,
+                delta, bucketNum, stickiness, usePrefetch);},
 	    [&] () {});
   cout << endl;
   
@@ -44,11 +49,23 @@ void timeMIS(Graph const &G, int rounds, char* outFile) {
   writeIntSeqToFile(F, outFile);
 }
 
+
 int main(int argc, char* argv[]) {
   commandLine P(argc, argv, "[-o <outFile>] [-r <rounds>] <inFile>");
+  cout << "running MIS\n";
   char* iFile = P.getArgument(0);
   char* oFile = P.getOptionValue("-o");
+  char* qType = P.getOptionValue("-type");
   int rounds = P.getOptionIntValue("-r",1);
+  int threadNum = P.getOptionIntValue("-threads", 1);
+  int queueNum = P.getOptionIntValue("-queues", 2);
+  int batchSizePop = P.getOptionIntValue("-batch1", 1);
+  int batchSizePush = P.getOptionIntValue("-batch2", 1);
+  int delta = P.getOptionIntValue("-delta", 1);
+  int bucketNum = P.getOptionLongValue("-buckets", 64);
+  int stickiness = P.getOptionLongValue("-stick", 1);
+  bool usePrefetch = P.getOptionValue("-prefetch");
   Graph G = readGraphFromFile<vertexId,edgeId>(iFile);
-  timeMIS(G, rounds, oFile);
+  timeMIS(G, rounds, oFile, qType, threadNum, queueNum, batchSizePop,
+          batchSizePush, delta, bucketNum, stickiness, usePrefetch);
 }

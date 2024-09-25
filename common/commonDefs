@@ -1,0 +1,27 @@
+ifeq (, $(shell clang --version | grep -i opencilk))
+    $(error Need clang with OpenCilk. Did you run source sourcme.sh?)
+else
+    CC = clang++
+endif
+
+ifeq (, $(shell which jemalloc-config))
+    JEMALLOC =
+else
+    JEMALLOCLD = $(shell jemalloc-config --libdir)
+    JEMALLOC = -L$(JEMALLOCLD) -ljemalloc
+endif
+
+CCFLAGS = -mcx16 -O3 -std=c++17 -DNDEBUG -fno-pie -fPIC
+CLFLAGS = $(JEMALLOC) -fno-pie
+
+# Add the root of pbbsbench to the includes directory
+# FIXME(mcj) This is very sketchy. SCons has a cleaner way to get the root.
+# My understanding is that "include"-based Makefile trees can make this work
+# more elegantly. pbbsbench isn't quite there yet.
+GITROOT := $(shell git rev-parse --show-toplevel)
+CCFLAGS += -I$(GITROOT) -I$(GITROOT)/parlaylib/include
+
+ifeq (, $(shell which ld.lld))
+else
+    CLFLAGS += -fuse-ld=lld
+endif

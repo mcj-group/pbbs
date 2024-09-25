@@ -12,19 +12,19 @@ all : $(DEFAULT_BENCHMARKS) $(DATA_GENERATORS)
 ext : $(ALL_BENCHMARKS) $(DATA_GENERATORS)
 
 $(DEFAULT_BENCHMARKS) : FORCE
-	cd benchmarks/$@; make -s
+	make -C benchmarks/$@
 
 $(EXT_BENCHMARKS) : FORCE
-	cd benchmarks/$@; make -s
+	make -C benchmarks/$@
 
 $(DATA_GENERATORS) : FORCE
-	cd testData/$@; make -j -s
+	make -C testData/$@
 
 FORCE :
 
 clean : FORCE
 	for bench in $(ALL_BENCHMARKS); do \
-	  make clean -s -C benchmarks/$$bench ; \
+	  make cleanall -s -C benchmarks/$$bench ; \
 	done
 	for data in $(DATA_GENERATORS); do \
 	  make clean -s -C testData/$$data ; \

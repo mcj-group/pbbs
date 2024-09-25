@@ -24,7 +24,7 @@
 #include <iostream>
 #include <stdint.h>
 #include <cstring>
-#include "../parlay/parallel.h"
+#include "parlay/parallel.h"
 #include "IO.h"
 #include "graphUtils.h"
 

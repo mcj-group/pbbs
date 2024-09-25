@@ -21,6 +21,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <iostream>
+#include <chrono>
 #include "parlay/parallel.h"
 #include "parlay/primitives.h"
 #include "common/graph.h"
@@ -60,10 +61,18 @@ struct MISstep {
   bool commit(size_t i) { return (Flags[i] = flag) > 0;}
 };
 
-parlay::sequence<char> maximalIndependentSet(Graph const &GS) {
+parlay::sequence<char> maximalIndependentSet(
+  Graph const &GS, char* qType, int threadNum, int queueNum, 
+  int batchSizePop, int batchSizePush, int delta, int bucketNum, 
+  int stickiness, bool usePrefetch)
+{
   size_t n = GS.n;
   parlay::sequence<char> Flags(n, (char) 0);
+  auto start = chrono::high_resolution_clock::now();
   MISstep mis(Flags, GS);
   pbbs::speculative_for<vertexId>(mis, 0, n, 20);
+  auto end = chrono::high_resolution_clock::now();
+  auto ms = chrono::duration_cast<chrono::milliseconds>(end-start).count();
+  cout << "runtime_ms " << ms << "\n";
   return Flags;
 }

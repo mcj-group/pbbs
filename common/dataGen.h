@@ -1,5 +1,5 @@
 #pragma once
-#include "../parlay/utilities.h"
+#include "parlay/utilities.h"
 
 namespace dataGen {
 

@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include "../parlay/parallel.h"
-#include "../parlay/primitives.h"
+#include "parlay/parallel.h"
+#include "parlay/primitives.h"
 
 
 // builds a static range minima query structure:

@@ -41,9 +41,9 @@
 //   b cabcab
 // hence the output string is: "bcc$aaabb"
 #include <iostream>
-#include "../parlay/parallel.h"
-#include "../parlay/primitives.h"
-#include "../parlay/io.h"
+#include "parlay/parallel.h"
+#include "parlay/primitives.h"
+#include "parlay/io.h"
 #include "suffix_array.h"
 
 using uchar = unsigned char;
