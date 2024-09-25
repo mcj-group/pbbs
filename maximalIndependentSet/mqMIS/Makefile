@@ -37,7 +37,7 @@ $(CHECK) : $(CHECK).C
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(CPS):
-	ln -s ../../../CPS/include/*.h .
+	ln -s ../../../cps/include/*.h .
 
 clean :
 	rm -f $(BENCH) *.o
