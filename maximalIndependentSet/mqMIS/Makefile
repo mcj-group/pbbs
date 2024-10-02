@@ -1,4 +1,4 @@
-CC = g++
+CC = clang++
 CCFLAGS = -mcx16 -O3 -std=c++17 -DNDEBUG
 CLFLAGS =
 CFLAGS = -DPARLAY_SEQUENTIAL -pthread $(CCFLAGS)
